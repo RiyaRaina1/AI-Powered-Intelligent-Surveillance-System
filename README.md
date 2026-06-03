@@ -178,6 +178,14 @@ python run_realtime.py --source 0 --camera-id cam_local
   - movement heatmap matrix
 - GET /api/analytics/forecast
   - predicted future visit counts
+- GET /api/threat/config
+  - view threat scoring weights and thresholds
+- GET /api/threat/assess/{log_id}
+  - explainable threat assessment for a specific visit log
+- GET /api/threat/assess
+  - batch threat assessment for recent logs (optional camera filter)
+- POST /api/threat/triage
+  - auto-create or assign high-risk threat incidents for operator queue
 - POST /api/ml/retrain
   - retrain all ML models
 - POST /api/ml/predict

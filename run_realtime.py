@@ -2,6 +2,7 @@ import argparse
 
 import cv2
 
+from data_pipeline.ingest import CameraIngestor
 from data_pipeline.stream_processor import StreamProcessor
 
 
@@ -13,14 +14,14 @@ def main() -> None:
 
     source = int(args.source) if args.source.isdigit() else args.source
 
-    cap = cv2.VideoCapture(source)
-    if not cap.isOpened():
+    cap = CameraIngestor(source)
+    if not cap.is_opened():
         raise RuntimeError(f"Unable to open source: {source}")
 
     processor = StreamProcessor()
 
     while True:
-        ok, frame = cap.read()
+        ok, frame = cap.read_latest()
         if not ok:
             break
 
